@@ -11,5 +11,5 @@ services:
 
   nextjs:
     build: ./training
-    expose:
-      - 3000:80
+    
+      
