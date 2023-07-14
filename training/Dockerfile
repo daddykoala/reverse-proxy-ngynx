@@ -1,24 +1,25 @@
-# ./training/Dockerfile
-
 # Base image
 FROM node:alpine
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available
 COPY package*.json ./
 
 RUN npm install
 
 # Bundle app source
-COPY . .
+# Copy all other source code to work directory
+ADD . /app
 
 # Build Next.js app
-RUN next build
+RUN npm run build
 
 # Expose port
 EXPOSE 3000
 
 # Start Next.js app
-CMD [ "next", "start" ]
+CMD [ "npm", "start" ]
